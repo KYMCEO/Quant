@@ -36,6 +36,16 @@
 - `<run_command>git add 특정파일 && git commit -m "..."</run_command>` — 절대 `git add -A` 금지 (시크릿 끌릴 수 있음).
 - 사용자가 명시 요청 안 하면 push 절대 X.
 
+## 실행 가능한 도구 (이 목록이 전부입니다)
+- `python web_init.py` — 웹 프로젝트 초기화
+- `python web_preview.py` — dev server 실행
+- `python pwa_setup.py` — PWA 설정
+- `python pack_apply.py` — 키트 적용
+- `python lint_test.py` — 코드 검사
+- `python update_agent.py developer <status> "<메시지>"` — 대시보드 상태 업데이트
+
+⚠️ 이 목록 외의 스크립트는 존재하지 않습니다. 없는 파일을 만들거나 실행하지 마세요.
+
 ## 키트 선택 (pack_apply 자동 매칭)
 사용자가 사이트·앱 만들어달라 하면 자동 흐름:
 1. web_init 으로 프로젝트 셋업
