@@ -1,0 +1,18 @@
+[
+    {
+        "date": "2026-05-10",
+        "topic": "HBM 장비주",
+        "source": "GPU Vendor X Annual Report",
+        "raw_data_points": [30, 45, 68],
+        "analysis_type": "성능",
+        "summary": "고밀도 컴퓨팅 환경에서 HBM의 전력 요구량이 급증하고 있으며, 이는 냉각 시스템 업그레이드를 강제합니다."
+    },
+    {
+        "date": "2026-05-15",
+        "topic": "HBM 장비주",
+        "source": "Industry Analyst Y Report",
+        "raw_data_points": [35, 48],
+        "analysis_type": "성능",
+        "summary": "전력 밀도 증가율이 주요 투자 판단 기준입니다. 액체냉각 도입 없이는 성능 확보가 불가능합니다."
+    }
+]

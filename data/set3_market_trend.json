@@ -1,0 +1,18 @@
+[
+    {
+        "date": "2026-05-21",
+        "topic": "데이터센터 전력",
+        "source": "Global Energy Watch",
+        "raw_data_points": [70, 85],
+        "analysis_type": "시장점유율",
+        "summary": "전 세계 데이터센터의 평균 전력 밀도는 연평균 15% 이상 증가하고 있으며, 이는 냉각 인프라 시장 성장의 핵심 동인입니다."
+    },
+    {
+        "date": "2026-05-25",
+        "topic": "전력 분배망",
+        "source": "Utility Sector Report",
+        "raw_data_points": [75, 90],
+        "analysis_type": "시장점유율",
+        "summary": "AI 클러스터 증설에 따라 전력 그리드 자체가 병목 구간이 되고 있으며, 이를 해소할 분산형 전원 솔루션의 중요성이 부각됩니다."
+    }
+]
