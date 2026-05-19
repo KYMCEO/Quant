@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-05-20T02:43:30",
+  "last_updated": "2026-05-20T03:07:13",
   "factory": {
-    "content_today": 0,
+    "content_today": 1,
     "active_agents": 0,
     "revenue_month": 0,
     "uptime_hours": 0
@@ -25,9 +25,15 @@
       "name": "라이터",
       "emoji": "✍️",
       "role": "스크립트 & 콘텐츠 작성",
-      "status": "idle",
-      "last_run": null,
-      "feed": []
+      "status": "done",
+      "last_run": "2026-05-20T03:07:13",
+      "feed": [
+        {
+          "time": "2026-05-20T03:07:13",
+          "message": "5부작 미니 시리즈 스토리라인 초안 완료: 규제 격차 분석 기반",
+          "status": "done"
+        }
+      ]
     },
     "youtube": {
       "name": "유튜브",
@@ -81,9 +87,25 @@
       "name": "코다리",
       "emoji": "💻",
       "role": "웹·앱 개발 & 시스템 구축",
-      "status": "idle",
-      "last_run": null,
-      "feed": []
+      "status": "done",
+      "last_run": "2026-05-20T02:59:43",
+      "feed": [
+        {
+          "time": "2026-05-20T02:59:43",
+          "message": "대시보드 연동 완료",
+          "status": "done"
+        },
+        {
+          "time": "2026-05-20T02:49:10",
+          "message": "대시보드 연동 완료",
+          "status": "done"
+        },
+        {
+          "time": "2026-05-20T02:46:36",
+          "message": "update_agent.py 인코딩 버그 수정 완료",
+          "status": "done"
+        }
+      ]
     }
   }
 }

@@ -21,7 +21,6 @@ status:
 """
 
 import json
-import sys
 import argparse
 from datetime import datetime
 from pathlib import Path
@@ -90,7 +89,8 @@ def main():
     data["last_updated"] = now
 
     save_data(data)
-    print(f"[{now}] {agent['emoji']} {agent['name']} → {args.status}: {args.message}")
+    msg = f"[{now}] {agent['name']} -> {args.status}: {args.message}"
+    print(msg.encode("utf-8", errors="replace").decode("utf-8", errors="replace"))
 
 
 if __name__ == "__main__":
