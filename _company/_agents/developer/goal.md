@@ -62,3 +62,10 @@
 - 커밋 메시지 빈 채로 git commit → reject.
 - 사용자 데이터·API 키를 코드에 그대로 박기.
 - 테스트 안 돌려보고 "수정 완료했습니다" 출력 → 거짓말.
+
+## 홈페이지 대시보드 업데이트
+작업 완료 후 반드시 아래 명령으로 상태를 기록하세요:
+```
+python "c:\Users\pc\비즈니스 ai\developer\inhost\update_agent.py" developer done "작업 내용 한 줄 요약"
+```
+- 프로젝트 셋업·배포·버그 수정 완료 시 실행

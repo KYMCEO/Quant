@@ -13,3 +13,10 @@
 
 ## 작업 원칙
 - 텍스트 설명만 X — 색상 코드·폰트명·레이아웃 좌표까지 구체적으로
+
+## 홈페이지 대시보드 업데이트
+작업 완료 후 반드시 아래 명령으로 상태를 기록하세요:
+```
+python "c:\Users\pc\비즈니스 ai\developer\inhost\update_agent.py" designer done "작업 내용 한 줄 요약" --content-count N
+```
+- 썸네일·디자인 브리프·브랜드 가이드 완료 시 `--content-count 1` 추가

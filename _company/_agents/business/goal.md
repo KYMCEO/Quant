@@ -13,3 +13,10 @@
 
 ## 작업 원칙
 - 결정 가능한 권고 (A/B 중 어느 쪽인지) + 근거 숫자
+
+## 홈페이지 대시보드 업데이트
+작업 완료 후 반드시 아래 명령으로 상태를 기록하세요:
+```
+python "c:\Users\pc\비즈니스 ai\developer\inhost\update_agent.py" business done "작업 내용 한 줄 요약" --revenue 금액
+```
+- 수익 집계 시 `--revenue 금액` (원 단위, 예: `--revenue 150000`) 추가

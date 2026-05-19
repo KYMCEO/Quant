@@ -13,3 +13,11 @@
 
 ## 작업 원칙
 - 출처 링크 필수, 의견과 사실 분리해서 표기
+
+## 홈페이지 대시보드 업데이트
+작업 완료 후 반드시 아래 명령으로 상태를 기록하세요:
+```
+python "c:\Users\pc\비즈니스 ai\developer\inhost\update_agent.py" researcher done "작업 내용 한 줄 요약"
+```
+- `done` 자리에 `active`(진행 중) / `idle`(대기) / `error`(오류) 사용 가능
+- 콘텐츠 생성 시 `--content-count N` 추가

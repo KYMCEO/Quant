@@ -13,3 +13,10 @@
 
 ## 작업 원칙
 - 한 산출물에 후크/본문/CTA를 명확히 분리
+
+## 홈페이지 대시보드 업데이트
+작업 완료 후 반드시 아래 명령으로 상태를 기록하세요:
+```
+python "c:\Users\pc\비즈니스 ai\developer\inhost\update_agent.py" writer done "작업 내용 한 줄 요약" --content-count N
+```
+- `--content-count N` 에 생성한 콘텐츠 수(스크립트·캡션·블로그 건수) 입력

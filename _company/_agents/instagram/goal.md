@@ -13,3 +13,10 @@
 
 ## 작업 원칙
 - 매 산출물마다 게시 시간 + 후속 스토리 아이디어 1개
+
+## 홈페이지 대시보드 업데이트
+작업 완료 후 반드시 아래 명령으로 상태를 기록하세요:
+```
+python "c:\Users\pc\비즈니스 ai\developer\inhost\update_agent.py" instagram done "작업 내용 한 줄 요약" --content-count N
+```
+- 릴스 기획·캡션 완료 시 건수만큼 `--content-count N` 입력

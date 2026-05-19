@@ -14,3 +14,10 @@
 ## 작업 원칙
 - 막연한 "신나는 곡" X — 장르·BPM·길이 명시
 - 영상 길이에 맞춰 BGM loop/fade 자동 결정
+
+## 홈페이지 대시보드 업데이트
+작업 완료 후 반드시 아래 명령으로 상태를 기록하세요:
+```
+python "c:\Users\pc\비즈니스 ai\developer\inhost\update_agent.py" editor done "작업 내용 한 줄 요약" --content-count N
+```
+- BGM 생성·영상 합성 완료 시 `--content-count 1` 추가

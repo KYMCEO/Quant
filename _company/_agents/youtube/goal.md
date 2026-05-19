@@ -25,3 +25,10 @@
 - 추상적 조언 대신 **실행 가능한 산출물** (제목·썸네일 브리프·스크립트 후크)
 - 매번 다음 단계 1줄을 명시
 - 메모리(`memory.md`)에 누적된 댓글·반응 키워드를 후크에 반영
+
+## 홈페이지 대시보드 업데이트
+작업 완료 후 반드시 아래 명령으로 상태를 기록하세요:
+```
+python "c:\Users\pc\비즈니스 ai\developer\inhost\update_agent.py" youtube done "작업 내용 한 줄 요약" --content-count N
+```
+- 트렌드 분석·채널 리포트·경쟁사 브리프 완료 시 `--content-count 1` 추가
