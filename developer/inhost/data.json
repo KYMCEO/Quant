@@ -1,8 +1,8 @@
 {
-  "last_updated": "2026-05-20T03:20:48",
+  "last_updated": "2026-05-21T02:11:17",
   "factory": {
     "content_today": 1,
-    "active_agents": 0,
+    "active_agents": 1,
     "revenue_month": 0,
     "uptime_hours": 0
   },
@@ -11,9 +11,14 @@
       "name": "리서처",
       "emoji": "🔍",
       "role": "시장 조사 & 트렌드 분석",
-      "status": "done",
-      "last_run": "2026-05-20T03:20:48",
+      "status": "active",
+      "last_run": "2026-05-21T02:11:17",
       "feed": [
+        {
+          "time": "2026-05-21T02:11:17",
+          "message": "신규 규제 격차 분석을 위한 CCUS/데이터 주권 분야의 지역별 정책 데이터 검색 시작",
+          "status": "active"
+        },
         {
           "time": "2026-05-20T03:20:48",
           "message": "데이터 주권 콘텐츠 작성을 위한 구조화된 리서치 블루프린트 및 데이터 수집 목표를 시스템 지식 기반에 통합함.",
