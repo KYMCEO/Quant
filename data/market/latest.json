@@ -1,0 +1,102 @@
+{
+  "collected_at": "2026-05-23T20:20:21.565427",
+  "nasdaq": {
+    "나스닥 지수": {
+      "ticker": "^IXIC",
+      "close": 26343.97,
+      "change_pct": 0.19
+    },
+    "S&P500": {
+      "ticker": "^GSPC",
+      "close": 7473.47,
+      "change_pct": 0.37
+    },
+    "반도체(SOX)": {
+      "ticker": "^SOX",
+      "close": 12202.54,
+      "change_pct": 1.99
+    },
+    "엔비디아": {
+      "ticker": "NVDA",
+      "close": 215.33,
+      "change_pct": -1.9
+    },
+    "AMD": {
+      "ticker": "AMD",
+      "close": 467.51,
+      "change_pct": 3.99
+    },
+    "마이크로소프트": {
+      "ticker": "MSFT",
+      "close": 418.57,
+      "change_pct": -0.12
+    },
+    "넥스트에라에너지": {
+      "ticker": "NEE",
+      "close": 88.55,
+      "change_pct": -1.27
+    },
+    "버티브": {
+      "ticker": "VRT",
+      "close": 327.46,
+      "change_pct": 1.26
+    },
+    "퀀타서비스": {
+      "ticker": "PWR",
+      "close": 723.44,
+      "change_pct": 0.91
+    },
+    "AI인프라(GRID)": {
+      "ticker": "GRID",
+      "close": 192.5,
+      "change_pct": 0.8
+    },
+    "클린에너지(ICLN)": {
+      "ticker": "ICLN",
+      "close": 22.41,
+      "change_pct": 1.04
+    },
+    "데이터센터(DTCR)": {
+      "ticker": "DTCR",
+      "close": 30.47,
+      "change_pct": -0.26
+    },
+    "배터리ESS(LIT)": {
+      "ticker": "LIT",
+      "close": 85.28,
+      "change_pct": 1.07
+    }
+  },
+  "kospi_index": {
+    "코스피 지수": {
+      "error": "'지수명'"
+    }
+  },
+  "kospi": {
+    "삼성전자": {
+      "code": "005930",
+      "close": 292500,
+      "change_pct": -2.34
+    },
+    "SK하이닉스": {
+      "code": "000660",
+      "close": 1941000,
+      "change_pct": 0.05
+    },
+    "한국전력": {
+      "code": "015760",
+      "close": 39700,
+      "change_pct": 0.76
+    },
+    "LS일렉트릭": {
+      "code": "010120",
+      "close": 281000,
+      "change_pct": 3.5
+    },
+    "HD현대일렉트릭": {
+      "code": "267260",
+      "close": 1173000,
+      "change_pct": 3.26
+    }
+  }
+}

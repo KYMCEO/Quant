@@ -10,22 +10,40 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 
 PORT = 8080
-ROOT = Path(__file__).parent
+ROOT        = Path(__file__).parent
+MARKET_JSON = ROOT.parent.parent / "data" / "market" / "latest.json"
 
 
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(ROOT), **kwargs)
 
+    def do_GET(self):
+        if self.path == "/api/market":
+            self._serve_market()
+        else:
+            super().do_GET()
+
+    def _serve_market(self):
+        if not MARKET_JSON.exists():
+            self.send_response(503)
+            self.end_headers()
+            self.wfile.write(b'{"error":"market data not found"}')
+            return
+        data = MARKET_JSON.read_bytes()
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.end_headers()
+        self.wfile.write(data)
+
     def end_headers(self):
-        # fetch API가 로컬에서 data.json을 읽을 수 있도록 CORS 허용
         self.send_header("Access-Control-Allow-Origin", "*")
         self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
         super().end_headers()
 
     def log_message(self, format, *args):
-        # /data.json 폴링 로그는 생략 (30초마다 찍혀서 노이즈)
-        if "data.json" not in (args[0] if args else ""):
+        path = args[0] if args else ""
+        if "data.json" not in path and "/api/market" not in path:
             super().log_message(format, *args)
 
 

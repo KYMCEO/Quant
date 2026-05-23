@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-05-23T19:46:45",
+  "last_updated": "2026-05-23T20:31:47",
   "factory": {
-    "content_today": 6,
+    "content_today": 9,
     "active_agents": 0,
     "revenue_month": 0,
     "uptime_hours": 0
@@ -86,9 +86,15 @@
       "name": "인스타그램",
       "emoji": "📸",
       "role": "릴스 기획 & SNS 자동화",
-      "status": "idle",
-      "last_run": null,
-      "feed": []
+      "status": "done",
+      "last_run": "2026-05-23T20:31:47",
+      "feed": [
+        {
+          "time": "2026-05-23T20:31:47",
+          "message": "규제 리스크 3가지 테마의 고강도 숏폼 콘텐츠(릴스) 기획 및 스크립트 완성 (총 3개)",
+          "status": "done"
+        }
+      ]
     },
     "editor": {
       "name": "루나",

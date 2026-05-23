@@ -45,6 +45,55 @@
       --max-w:    1100px;
     }
 
+    /* ── MARKET TICKER ───────────────────────────────────────── */
+    #market { padding: 80px 0; }
+
+    .market-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    @media (max-width: 768px) {
+      .market-grid { grid-template-columns: 1fr; }
+    }
+
+    .market-col {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .market-col-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+
+    .ticker-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .ticker-row:last-child { border-bottom: none; }
+
+    .ticker-name { color: var(--text); }
+
+    .ticker-val  { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+    .up   { color: #4ade80; }
+    .down { color: #f87171; }
+    .flat { color: var(--muted); }
+
     html { scroll-behavior: smooth; }
 
     body {
@@ -737,6 +786,30 @@
     </div>
   </section>
 
+  <!-- MARKET TICKER -->
+  <section id="market">
+    <div class="container">
+      <div class="section-label">실시간 시황</div>
+      <h2 class="section-title">AI가 매일 오전 자동 수집한<br/>오늘의 시장 데이터</h2>
+      <p class="section-desc" id="market-updated">데이터 불러오는 중...</p>
+
+      <div class="market-grid">
+        <div class="market-col">
+          <div class="market-col-title">🇺🇸 미국</div>
+          <div id="market-us"></div>
+        </div>
+        <div class="market-col">
+          <div class="market-col-title">🇰🇷 한국</div>
+          <div id="market-kr"></div>
+        </div>
+        <div class="market-col">
+          <div class="market-col-title">🎯 AI Stock Factory 테마</div>
+          <div id="market-theme"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- HOW IT WORKS -->
   <section id="how">
     <div class="container">
@@ -973,6 +1046,63 @@
 
     fetchAndRender();
     setInterval(fetchAndRender, 30_000);
+  </script>
+
+  <script>
+    // ── 시황 위젯 ────────────────────────────────────────────
+    const THEME_KEYS = ["AI인프라(GRID)", "클린에너지(ICLN)", "배터리ESS(LIT)", "데이터센터(DTCR)"];
+    const US_KEYS    = ["나스닥 지수", "S&P500", "반도체(SOX)", "엔비디아", "AMD", "마이크로소프트", "넥스트에라에너지", "버티브", "퀀타서비스"];
+
+    function pctClass(v) {
+      if (v > 0.5)  return "up";
+      if (v < -0.5) return "down";
+      return "flat";
+    }
+
+    function pctSign(v) { return v > 0 ? `+${v.toFixed(2)}%` : `${v.toFixed(2)}%`; }
+
+    function renderRows(container, entries) {
+      container.innerHTML = entries.map(([name, v]) => {
+        if (!v || v.error) return "";
+        const cls  = pctClass(v.change_pct);
+        const sign = pctSign(v.change_pct);
+        const val  = v.close?.toLocaleString() ?? "–";
+        return `<div class="ticker-row">
+          <span class="ticker-name">${name}</span>
+          <span class="ticker-val ${cls}">${val}&nbsp;&nbsp;${sign}</span>
+        </div>`;
+      }).join("");
+    }
+
+    async function fetchMarket() {
+      try {
+        const res  = await fetch("/api/market");
+        if (!res.ok) throw new Error("no data");
+        const data = await res.json();
+
+        const nasdaq = data.nasdaq ?? {};
+        const kospi  = { ...(data.kospi_index ?? {}), ...(data.kospi ?? {}) };
+
+        const usEntries    = US_KEYS.map(k => [k, nasdaq[k]]).filter(([,v]) => v && !v.error);
+        const krEntries    = Object.entries(kospi).filter(([,v]) => v && !v.error);
+        const themeEntries = THEME_KEYS.map(k => [k, nasdaq[k]]).filter(([,v]) => v && !v.error);
+
+        renderRows(document.getElementById("market-us"),    usEntries);
+        renderRows(document.getElementById("market-kr"),    krEntries);
+        renderRows(document.getElementById("market-theme"), themeEntries);
+
+        const ts = data.collected_at?.slice(0, 16).replace("T", " ") ?? "";
+        document.getElementById("market-updated").textContent =
+          `수집 시각: ${ts} · 매일 오전 9:05 자동 갱신`;
+
+      } catch {
+        document.getElementById("market-updated").textContent =
+          "서버에서 시황 데이터를 가져오지 못했습니다. python server.py가 실행 중인지 확인하세요.";
+      }
+    }
+
+    fetchMarket();
+    setInterval(fetchMarket, 60_000);
   </script>
 
 </body>
