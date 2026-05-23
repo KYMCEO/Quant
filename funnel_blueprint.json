@@ -1,0 +1,76 @@
+{
+  "campaign_goal": "규제 격차 플레이북 구매 전환율(CRO) 최적화",
+  "target_persona": "주식 시장의 규제 변화에 불안감을 느끼는 25~45세 직장인/개인투자자",
+  "duration": "7 days (Mon-Sun)",
+  "asset_dependencies": [
+    {"dependency_id": "CORE_SCRIPT_V1", "source": "Writer/Researcher", "description": "최종 10분 분량의 규제 리스크 분석 스크립트"},
+    {"dependency_id": "PRODUCT_DETAILS", "source": "Designer", "description": "플레이북의 핵심 가치 및 가격 비교 테이블 구조"}
+  ],
+  "daily_schedule": [
+    {
+      "day": "Day 1 (Mon)",
+      "funnel_stage": "Awareness (문제 인식) - What is wrong?",
+      "primary_asset": {
+        "platform": "Instagram Reels",
+        "content_source_ref": "CORE_SCRIPT_V1: [데이터 주권 위기] 파트",
+        "output_format": "15초 오디오 스크립트 + 충격적 통계 그래프 애니메이션",
+        "cta_action": "댓글 확인 (핵심 위험 요소 3가지 목록 제공)",
+        "goal": "관심 유발 및 문제 심각성 각인"
+      },
+      "secondary_asset": {
+        "platform": "X/Twitter",
+        "content_source_ref": "CORE_SCRIPT_V1: [요약 키워드]",
+        "output_format": "3개의 핵심 질문 형식의 트윗 묶음 (Thread)",
+        "cta_action": "프로필 링크 클릭 유도 (무료 체크리스트 다운로드)",
+        "goal": "빠른 확산 및 리드 확보"
+      }
+    },
+    {
+      "day": "Day 3 (Wed)",
+      "funnel_stage": "Consideration (정보 탐색) - Why is it happening?",
+      "primary_asset": {
+        "platform": "YouTube Shorts/Reels",
+        "content_source_ref": "CORE_SCRIPT_V1: [전력 인프라 리스크] 파트",
+        "output_format": "20초 비디오 브리프 + 글로벌 지도 애니메이션 (규제 변화 시각화)",
+        "cta_action": "뉴스레터 구독 유도 (심층 보고서 맛보기 제공)",
+        "goal": "전문성 어필 및 정보 격차 자극"
+      },
+      "secondary_asset": {
+        "platform": "Email Newsletter",
+        "content_source_ref": "CORE_SCRIPT_V1: [공급망 분석]",
+        "output_format": "본문형 텍스트 (300자 내외 요약) + 핵심 질문 제시",
+        "cta_action": "전체 보고서 맛보기 PDF 다운로드 유도",
+        "goal": "개인 정보 확보 및 관계 구축"
+      }
+    },
+    {
+      "day": "Day 5 (Fri)",
+      "funnel_stage": "Decision (해결책 제시) - What should I do?",
+      "primary_asset": {
+        "platform": "Instagram Carousel/Blog",
+        "content_source_ref": "PRODUCT_DETAILS + CORE_SCRIPT_V1: [솔루션 제안] 파트",
+        "output_format": "5장 구성의 인포그래픽 (문제점 -> 해결책 구조)",
+        "cta_action": "Playbook 랜딩 페이지 이동 유도 ('구매 전 체크리스트' 제공)",
+        "goal": "해결책에 대한 확신 부여"
+      },
+      "secondary_asset": {
+        "platform": "X/Twitter",
+        "content_source_ref": "PRODUCT_DETAILS: [가격표 비교]",
+        "output_format": "비교 테이블 이미지와 '최적화' 강조 캡션",
+        "cta_action": "지금 구매하기 버튼 (랜딩 페이지 직접 연결)",
+        "goal": "즉각적인 구매 압박 및 전환 유도"
+      }
+    },
+    {
+      "day": "Day 7 (Sun)",
+      "funnel_stage": "Conversion / Retargeting",
+      "primary_asset": {
+        "platform": "All Channels (광고)",
+        "content_source_ref": "CORE_SCRIPT_V1: [최종 경고 메시지]",
+        "output_format": "긴급성을 극대화한 카피라이팅 및 CTA 버튼",
+        "cta_action": "구매 페이지로 직접 연결 (FOMO 유발)",
+        "goal": "마지막 구매 결정 강제"
+      }
+    }
+  ]
+}
