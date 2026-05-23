@@ -22,25 +22,51 @@ AUTONOMY_LEVEL: 2
 
 ## 사용 가능한 도구
 
-_⚠️ 이 에이전트의 도구는 모두 로드맵 단계입니다. 현재 LLM 추론만 가능하고, 외부 API 호출이나 파일 생성은 아직 동작하지 않습니다._
+### `web_search` ✅ 활성화 (Claude Code 내장, 무료)
 
-## 로드맵 (예정)
+Claude Code 환경의 WebSearch 기능을 직접 사용한다. 별도 API 키 불필요.
 
-### `web_search` _(예정)_
-Brave/DuckDuckGo 검색 (Connected)
+**사용 방법**: Claude Code 세션 내에서 WebSearch 도구 호출
+**제한**: 실시간 검색 (최신 뉴스, 정책 변화, 주가 데이터)
+**출력 형식**: 출처 URL + 날짜 + 핵심 내용 요약
 
-- 아직 구현되지 않은 도구입니다. 로드맵에 있으며 향후 버전에서 추가 예정.
+**우선 검색 소스 (무료)**:
+- Reuters, Bloomberg (헤드라인 무료)
+- SEC EDGAR (미국 기업 공시)
+- EUR-Lex (EU 법안 원문)
+- Federal Register (미국 규제 고시)
+- 한국거래소 KIND (국내 공시)
 
-### `page_fetcher` _(예정)_
-본문 추출 + 출처 인용
+---
 
-- 아직 구현되지 않은 도구입니다. 로드맵에 있으며 향후 버전에서 추가 예정.
+### `page_fetcher` ✅ 활성화 (Claude Code 내장, 무료)
 
-### `monitor_daily` _(예정)_
-매일 내 분야 뉴스 → CEO 브리핑
+Claude Code 환경의 WebFetch 기능으로 특정 URL 본문을 직접 추출한다.
 
-- 아직 구현되지 않은 도구입니다. 로드맵에 있으며 향후 버전에서 추가 예정.
+**사용 방법**: Claude Code 세션 내에서 WebFetch 도구 호출 (URL 직접 지정)
+**제한**: 로그인 필요 페이지, 동적 렌더링 페이지 일부 불가
+**출력 형식**: 원문 텍스트 + 인용 구조
 
+---
+
+### `monitor_daily` _(로드맵 예정)_
+매일 내 분야 뉴스 → CEO 브리핑 자동화
+
+- 아직 구현되지 않은 도구입니다. 현재는 CEO가 수동으로 Researcher를 호출하는 방식으로 대체.
+
+---
+
+## 무료 데이터 소스 목록
+
+| 카테고리 | 소스 | URL | 비고 |
+|---|---|---|---|
+| EU 규제 | EUR-Lex | eur-lex.europa.eu | AI Act 원문 포함 |
+| 미국 규제 | Federal Register | federalregister.gov | 무료 API 제공 |
+| 미국 공시 | SEC EDGAR | sec.gov/cgi-bin/browse-edgar | 무료 |
+| 국내 공시 | KIND | kind.krx.co.kr | 무료 |
+| 에너지 데이터 | EIA | eia.gov | 미국 에너지 통계 무료 |
+| 글로벌 AI 정책 | OECD AI Policy Observatory | oecd.ai | 무료 |
+| 반도체 무역 | ITC | usitc.gov | 무료 |
 
 ---
 

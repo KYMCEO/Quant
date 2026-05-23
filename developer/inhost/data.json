@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-23T19:04:32",
+  "last_updated": "2026-05-23T19:46:45",
   "factory": {
     "content_today": 6,
     "active_agents": 0,
@@ -102,9 +102,15 @@
       "name": "현빈",
       "emoji": "💼",
       "role": "수익화 전략 & KPI 분석",
-      "status": "idle",
-      "last_run": null,
-      "feed": []
+      "status": "done",
+      "last_run": "2026-05-23T19:46:45",
+      "feed": [
+        {
+          "time": "2026-05-23T19:46:45",
+          "message": "플레이북 최종 가격 및 판매 플로우 구조화 완료",
+          "status": "done"
+        }
+      ]
     },
     "secretary": {
       "name": "영숙",
