@@ -1,92 +1,199 @@
-import markdown
-from weasyprint import HTML, CSS
-import os
+"""
+AI Stock Factory — 플레이북 PDF 변환기 (fpdf2 기반, 외부 라이브러리 불필요)
+"""
+import re
+from pathlib import Path
+from fpdf import FPDF
 
-# --- 설정 상수 ---
-INPUT_MD = "sessions/2026-05-23T10-00/playbook_draft.md"
-OUTPUT_PDF = "data/products/playbook_v1.pdf"
-BACKGROUND_COLOR = "#0A1931" # Deep Navy
-ACCENT_COLOR = "#00FFFF"     # Electric Cyan
+INPUT_MD   = Path("sessions/2026-05-23T10-00/playbook_draft.md")
+OUTPUT_PDF = Path("data/products/playbook_v1.pdf")
+OUTPUT_PDF.parent.mkdir(parents=True, exist_ok=True)
 
-def create_custom_css() -> str:
-    """지정된 브랜드 색상을 적용하는 CSS 문자열을 생성합니다."""
-    return f"""
-    @page {{
-        size: A4;
-        margin: 2cm;
-    }}
-    body {{
-        background-color: {BACKGROUND_COLOR}; /* Deep Navy 배경 */
-        color: #E0FFFF; /* 밝은 Cyan 계열의 기본 텍스트 색상 */
-        font-family: 'Arial', sans-serif;
-        padding: 20px;
-    }}
-    h1, h2, h3 {{
-        color: {ACCENT_COLOR} !important; /* 제목 강조색 적용 */
-        border-bottom: 2px solid {ACCENT_COLOR};
-        padding-bottom: 5px;
-        margin-top: 40px;
-    }}
-    pre, code {{
-        background-color: #1a3658; /* 코드 블록 배경 */
-        color: {ACCENT_COLOR} !important;
-        padding: 10px;
-        border-radius: 5px;
-        display: block;
-        overflow-x: auto;
-    }}
-    blockquote {{
-        background-color: #1a3658; /* 인용구 배경 */
-        border-left: 5px solid {ACCENT_COLOR};
-        padding: 10px 20px;
-        margin: 20px 0;
-        font-style: italic;
-    }}
-    /* 표 스타일링 (Table Styling) */
-    table {{
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-    }}
-    th, td {{
-        padding: 10px;
-        text-align: left;
-        border: 1px solid #3a5e8d; /* 어두운 테두리 */
-    }}
-    th {{
-        background-color: {ACCENT_COLOR};
-        color: {BACKGROUND_COLOR} !important; /* 제목 배경은 Cyan, 글자는 어둠 */
-    }}
-    """
+# ── 색상 ──────────────────────────────────────────────────
+BG        = (10,  25,  49)   # Deep Navy  #0A1931
+CYAN      = (0,   255, 255)  # Electric Cyan #00FFFF
+GOLD      = (240, 180, 41)   # Gold
+WHITE     = (224, 224, 240)
+MUTED     = (120, 120, 154)
+DARK_CARD = (19,  19,  26)   # Surface
 
-def convert_md_to_pdf(input_path: str, output_path: str):
-    """마크다운 파일을 읽어 CSS 스타일을 적용한 후 PDF로 변환합니다."""
-    print("--- [Step 1/3] 마크다운 파일 로드 및 HTML 변환 시작 ---")
 
-    if not os.path.exists(input_path):
-        raise FileNotFoundError(f"입력 마크다운 파일을 찾을 수 없습니다: {input_path}")
+class Playbook(FPDF):
+    def header(self):
+        self.set_fill_color(*BG)
+        self.rect(0, 0, 210, 297, "F")
 
-    with open(input_path, 'r', encoding='utf-8') as f:
-        md_content = f.read()
+    def footer(self):
+        self.set_y(-15)
+        self.set_font("Malgun", "", 8)
+        self.set_text_color(*MUTED)
+        self.cell(0, 10, f"AI Stock Factory  |  Confidential  |  Page {self.page_no()}", align="C")
 
-    # 1. Markdown to HTML 변환
-    html_fragment = markdown.markdown(md_content)
+    def cover_page(self, title, subtitle, price):
+        self.add_page()
+        # 상단 Cyan 라인
+        self.set_fill_color(*CYAN)
+        self.rect(0, 0, 210, 4, "F")
 
-    # 2. 전체 문서 구조화 및 CSS 적용을 위한 HTML 생성
-    css = create_custom_css()
-    full_html = f"""<!DOCTYPE html><html><head><meta charset="utf-8" /><title>플레이북 보고서</title><style>{css}</style></head><body>{html_fragment}</body></html>"""
+        # 제목
+        self.set_y(60)
+        self.set_font("Malgun", "B", 28)
+        self.set_text_color(*CYAN)
+        self.multi_cell(0, 12, title, align="C")
 
-    print("--- [Step 2/3] CSS 스타일 적용 및 PDF 생성 시작 (weasyprint 사용) ---")
-    try:
-        # weasyprint를 사용하여 HTML을 PDF로 변환
-        HTML(string=full_html).write_pdf(output_path, stylesheets=[CSS(string=css)])
-        print(f"✅ 성공적으로 PDF 파일이 생성되었습니다: {output_path}")
-    except Exception as e:
-        print(f"❌ PDF 생성 중 오류가 발생했습니다. 환경 설정을 확인하세요: {e}")
-        raise
+        # 부제
+        self.ln(6)
+        self.set_font("Malgun", "", 13)
+        self.set_text_color(*WHITE)
+        self.multi_cell(0, 7, subtitle, align="C")
+
+        # 가격 뱃지
+        self.ln(20)
+        self.set_font("Malgun", "B", 18)
+        self.set_text_color(*GOLD)
+        self.cell(0, 10, price, align="C")
+
+        # 하단 브랜드
+        self.set_y(-40)
+        self.set_font("Malgun", "B", 10)
+        self.set_text_color(*MUTED)
+        self.cell(0, 6, "AI STOCK FACTORY", align="C")
+        self.ln(5)
+        self.set_font("Malgun", "", 9)
+        self.cell(0, 5, "Global Regulatory Gap Analysis  |  2026", align="C")
+
+    def _reset_x(self):
+        self.set_x(self.l_margin)
+
+    def chapter_title(self, text):
+        self.ln(6)
+        self.set_fill_color(*CYAN)
+        self.rect(14, self.get_y(), 3, 10, "F")
+        self.set_x(20)
+        self.set_font("Malgun", "B", 14)
+        self.set_text_color(*CYAN)
+        self.multi_cell(176, 10, text)
+        self._reset_x()
+        self.set_draw_color(*CYAN)
+        self.set_line_width(0.3)
+        self.line(14, self.get_y(), 196, self.get_y())
+        self.ln(4)
+        self._reset_x()
+
+    def section_title(self, text):
+        self.ln(4)
+        self.set_font("Malgun", "B", 11)
+        self.set_text_color(*GOLD)
+        self.multi_cell(182, 7, text)
+        self.ln(1)
+        self._reset_x()
+
+    def body_text(self, text):
+        self.set_font("Malgun", "", 10)
+        self.set_text_color(*WHITE)
+        self.multi_cell(182, 6, text)
+        self.ln(1)
+        self._reset_x()
+
+    def bullet(self, text):
+        self.set_font("Malgun", "", 10)
+        self.set_x(18)
+        self.set_text_color(*CYAN)
+        self.cell(5, 6, "\x95")
+        self.set_text_color(*WHITE)
+        self.multi_cell(177, 6, text)
+        self._reset_x()
+
+    def highlight_box(self, text):
+        self.set_fill_color(*DARK_CARD)
+        self.set_draw_color(*CYAN)
+        self.set_line_width(0.5)
+        y = self.get_y()
+        self.rect(14, y, 182, 14, "FD")
+        self.set_xy(18, y + 3)
+        self.set_font("Malgun", "B", 10)
+        self.set_text_color(*CYAN)
+        self.multi_cell(174, 6, text)
+        self.ln(4)
+        self._reset_x()
+
+
+def clean(text):
+    """마크다운 기호 및 이모지 제거"""
+    text = re.sub(r"\*\*(.+?)\*\*", r"\1", text)
+    text = re.sub(r"\*(.+?)\*",     r"\1", text)
+    text = re.sub(r"`(.+?)`",       r"\1", text)
+    text = re.sub(r"\[(.+?)\]\(.+?\)", r"\1", text)
+    # 이모지 제거 (Malgun Gothic 미지원 문자 방어)
+    text = "".join(c for c in text if ord(c) < 0x10000)
+    return text.strip()
+
+
+def render_md(pdf, md_text):
+    lines = md_text.splitlines()
+    i = 0
+    while i < len(lines):
+        line = lines[i].rstrip()
+
+        if line.startswith("# "):
+            pdf.cover_page(
+                clean(line[2:]),
+                "미국·EU·아시아 전력 규제 격차가 만드는 2026 투자 기회",
+                "$299 USD"
+            )
+        elif line.startswith("## "):
+            pdf.add_page()
+            pdf.chapter_title(clean(line[3:]))
+        elif line.startswith("### "):
+            pdf.section_title(clean(line[4:]))
+        elif line.startswith("- ") or line.startswith("* "):
+            pdf.bullet(clean(line[2:]))
+        elif line.startswith("> "):
+            pdf.highlight_box(clean(line[2:]))
+        elif line.startswith("|"):
+            # 테이블 — 헤더 행만 굵게, 나머지 일반
+            cells = [c.strip() for c in line.strip("|").split("|")]
+            if all(re.match(r"^[-: ]+$", c) for c in cells if c):
+                i += 1
+                continue
+            pdf.set_font("Malgun", "", 9)
+            pdf.set_text_color(*WHITE)
+            col_w = 176 // max(len(cells), 1)
+            is_header = lines[i-1].startswith("|") is False or (i+1 < len(lines) and re.match(r"^\|[-| :]+\|", lines[i+1]))
+            if is_header:
+                pdf.set_fill_color(*DARK_CARD)
+                pdf.set_font("Malgun", "B", 9)
+                pdf.set_text_color(*CYAN)
+            for cell in cells:
+                if cell:
+                    pdf.cell(col_w, 7, clean(cell)[:30], border=1, fill=is_header)
+            pdf.ln()
+        elif line == "" or line == "---":
+            pdf.ln(3)
+        else:
+            pdf.body_text(clean(line))
+
+        i += 1
+
+
+def main():
+    md_text = INPUT_MD.read_text(encoding="utf-8")
+
+    pdf = Playbook()
+    pdf.add_font("Malgun",  "", r"C:\Windows\Fonts\malgun.ttf")
+    pdf.add_font("Malgun",  "B", r"C:\Windows\Fonts\malgunbd.ttf")
+    pdf.set_font("Malgun", size=10)
+    pdf.set_auto_page_break(auto=True, margin=20)
+    pdf.set_margins(14, 16, 14)
+
+    render_md(pdf, md_text)
+
+    pdf.output(str(OUTPUT_PDF))
+
+    size_kb = OUTPUT_PDF.stat().st_size // 1024
+    print(f"PDF 생성 완료: {OUTPUT_PDF}")
+    print(f"크기: {size_kb} KB  |  페이지: {pdf.page}")
+
 
 if __name__ == "__main__":
-    try:
-        convert_md_to_pdf(INPUT_MD, OUTPUT_PDF)
-    except FileNotFoundError as e:
-        print(f"⚠️ 스크립트 실행 실패: {e}")
+    main()
