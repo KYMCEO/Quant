@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-05-21T02:27:03",
+  "last_updated": "2026-05-23T19:04:32",
   "factory": {
-    "content_today": 5,
+    "content_today": 6,
     "active_agents": 0,
     "revenue_month": 0,
     "uptime_hours": 0
@@ -12,8 +12,13 @@
       "emoji": "🔍",
       "role": "시장 조사 & 트렌드 분석",
       "status": "done",
-      "last_run": "2026-05-21T02:25:23",
+      "last_run": "2026-05-23T19:01:31",
       "feed": [
+        {
+          "time": "2026-05-23T19:01:31",
+          "message": "글로벌 AI 데이터센터 에너지 그리드 규제 격차 분석 보고서 완성",
+          "status": "done"
+        },
         {
           "time": "2026-05-21T02:25:23",
           "message": "규제 격차 기반 주식 후보군 데이터셋 v1.0 생성 완료 및 핵심 테마 3가지 구조화",
@@ -67,9 +72,15 @@
       "name": "디자이너",
       "emoji": "🎨",
       "role": "썸네일 & 브랜드 디자인",
-      "status": "idle",
-      "last_run": null,
-      "feed": []
+      "status": "done",
+      "last_run": "2026-05-23T19:04:32",
+      "feed": [
+        {
+          "time": "2026-05-23T19:04:32",
+          "message": "규제 격차 분석 기반의 3종 마스터 인포그래픽 슬라이드셋 제작 및 아카이브 시스템 v1.2 업데이트 완료.",
+          "status": "done"
+        }
+      ]
     },
     "instagram": {
       "name": "인스타그램",
