@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-24T22:08:40",
+  "last_updated": "2026-05-25T23:52:55",
   "factory": {
     "content_today": 30,
     "active_agents": 0,
@@ -164,8 +164,13 @@
       "emoji": "💼",
       "role": "수익화 전략 & KPI 분석",
       "status": "done",
-      "last_run": "2026-05-23T19:46:45",
+      "last_run": "2026-05-25T23:52:55",
       "feed": [
+        {
+          "time": "2026-05-25T23:52:55",
+          "message": "수익화 Funnel 정의 완료: TOFU-MOFU-BOFU 기반의 플레이북 판매 시스템 구축 및 KPI 재설정.",
+          "status": "done"
+        },
         {
           "time": "2026-05-23T19:46:45",
           "message": "플레이북 최종 가격 및 판매 플로우 구조화 완료",
